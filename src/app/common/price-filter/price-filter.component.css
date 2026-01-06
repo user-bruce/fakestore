@@ -1,0 +1,25 @@
+.price-slider{
+    margin-top: .75rem;
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+}
+
+.aside-wrapper{
+    padding: .95rem;
+    min-width: 160px;
+}
+
+.card{
+    margin-bottom: .5rem;
+}
+
+.value{
+    color: rgb(31, 191, 92);
+    font-weight: 600;
+}
+
+.title{
+    font-weight: 500;
+    color: rgb(143, 142, 142);
+}

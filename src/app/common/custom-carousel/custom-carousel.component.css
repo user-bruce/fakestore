@@ -1,0 +1,80 @@
+.carousel-container {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .carousel-loading .carousel-track {
+      opacity: 0.5;
+    }
+
+    .carousel-nav {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .nav-button {
+      pointer-events: all;
+      margin: 0 1rem;
+    }
+
+    .carousel-track-container {
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+      will-change: transform;
+    }
+
+    .carousel-indicators {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .indicator {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: none;
+      background-color: #e0e0e0;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .indicator.active {
+      background-color: #007bff;
+    }
+
+    .indicator:hover {
+      background-color: #b0b0b0;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .nav-button {
+        margin: 0 0.5rem;
+      }
+
+      .indicator {
+        width: 10px;
+        height: 10px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .carousel-nav {
+        display: none;
+      }
+    }

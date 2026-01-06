@@ -1,0 +1,43 @@
+<div class="carousel-container" [class.carousel-loading]="loading">
+      <!-- Navigation Buttons -->
+      <div class="carousel-nav">
+        <p-button 
+          icon="pi pi-chevron-left" 
+          [text]="true" 
+          [rounded]="true"
+          (onClick)="prev()"
+          [disabled]="currentIndex === 0"
+          class="nav-button">
+        </p-button>
+        
+        <p-button 
+          icon="pi pi-chevron-right" 
+          [text]="true" 
+          [rounded]="true"
+          (onClick)="next()"
+          [disabled]="currentIndex >= totalPages - 1"
+          class="nav-button">
+        </p-button>
+      </div>
+
+      <!-- Carousel Track -->
+      <div class="carousel-track-container">
+        <div 
+          class="carousel-track" 
+          [style.transform]="'translateX(' + translateX + '%)'"
+          [style.transition]="transition">
+          <ng-content></ng-content>
+        </div>
+      </div>
+
+      <!-- Indicators -->
+      <div class="carousel-indicators" *ngIf="showIndicators && totalPages > 1">
+        <button
+          *ngFor="let indicator of indicators; let i = index"
+          class="indicator"
+          [class.active]="i === currentPage"
+          (click)="goToPage(i)"
+          [attr.aria-label]="'Go to slide ' + (i + 1)">
+        </button>
+      </div>
+    </div>

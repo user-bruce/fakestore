@@ -1,0 +1,164 @@
+<p-toast
+  life="3000"
+  position="top-right"
+  [breakpoints]="{ '920px': { width: '100%', right: '0', left: '0' } }"
+></p-toast>
+
+@if(product() != undefined){
+<div class="bg-white">
+  <div class="pt-6">
+    <div
+      class="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-8 lg:px-8"
+    >
+      @for(im of product()!.images; track $index){
+      <img
+        [src]="product()!.images[$index]"
+        alt="Model wearing plain white basic tee."
+        class="row-span-2 aspect-4/5 size-full object-cover sm:rounded-lg lg:aspect-3/4"
+      />
+      }
+    </div>
+
+    <!-- Product info -->
+    <div
+      class="mx-auto max-w-2xl px-4 pt-10 pb-16 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto_auto_1fr] lg:gap-x-8 lg:px-8 lg:pt-16 lg:pb-24"
+    >
+      <div class="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
+        <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+          {{ product()!.title }}
+        </h1>
+        <span class="text-gray-400 font-medium mt-2 text-md">{{
+          product()?.category?.name
+        }}</span>
+      </div>
+
+      <div class="mt-4 lg:row-span-3 lg:mt-0">
+        <h2 class="sr-only">Product information</h2>
+        <p class="text-3xl tracking-tight text-gray-900">
+          {{ product()!.price | currency }}
+        </p>
+
+        <form class="mt-10">
+          <div>
+            <h3 class="text-sm font-medium text-gray-900">
+              Listed - {{ product()?.creationAt | date : "medium" }}
+            </h3>
+          </div>
+
+          <button
+            class="mt-6 w-full"
+            pButton
+            label="Add to cart"
+            pRipple
+            icon="pi pi-shopping-bag"
+          ></button>
+        </form>
+      </div>
+
+      <div
+        class="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pt-6 lg:pr-8 lg:pb-16"
+      >
+        <!-- Description and details -->
+        <div>
+          <h3 class="sr-only">Description</h3>
+
+          <div class="space-y-6">
+            <p class="text-base text-gray-900">{{ product()!.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+}
+<!-- <div class="detail-container">
+  @if(product()!==undefined){
+  <p-card>
+    <ng-template pTemplate="content">
+      <div class="product-contents-container">
+        <div class="main-content-container">
+          <img [src]="productImageUrl()" class="product-detail-image" />
+          <div class="thumbnails">
+            @for(thumbnail of product()?.images; track $index){
+            <img
+              [src]="thumbnail"
+              class="thumbnail-image"
+              (click)="thumbnailClicked(thumbnail)"
+              width="75px"
+            />
+            }
+          </div>
+        </div>
+        <div class="text-contents-container">
+          <div class="title">{{ product()?.title }}</div>
+          <span class="subtitle">{{ product()?.category?.name }}</span>
+          <p class="product-description">
+            {{ product()?.description }}
+          </p>
+          <div class="product-price-container">
+            <span class="text-4xl font-bold text-green-700">{{
+              product()?.price | currency
+            }}</span>
+          </div>
+
+          <div class="product-actions-container">
+            <button
+              pButton
+              label="Back"
+              (click)="backClicked()"
+              outlined="true"
+              icon="pi pi-arrow-left"
+              size="small"
+              severity="primary"
+            ></button>
+            <p-button
+              label="Add to cart"
+              class="w-full"
+              icon="pi pi-shopping-bag"
+              size="small"
+              (onClick)="addToCart()"
+              styleClass=""
+            />
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </p-card>
+  } @else {
+  <p-card>
+    <ng-template pTemplate="content">
+      <div class="product-contents-container">
+        <div class="main-content-container">
+          <p-skeleton
+            size="25rem"
+            class="product-detail-image product-image-skeleton"
+          ></p-skeleton>
+          <div class="thumbnails">
+            @for(thumbnail of [1,2,3]; track $index){
+            <p-skeleton
+              size="5rem"
+              class="thumbnail-image product-thumbnail-image"
+            ></p-skeleton>
+            }
+          </div>
+        </div>
+        <div class="text-skeletons-container flex flex-col gap-3 pt-4">
+          <p-skeleton width="15rem" height="3rem"></p-skeleton>
+          <p-skeleton width="5rem" height="1rem"></p-skeleton>
+          <p-skeleton> </p-skeleton>
+          <p-skeleton> </p-skeleton>
+          <div class="my-3">
+            <p-skeleton height="3rem" width="5rem"></p-skeleton>
+          </div>
+
+          <div class="flex gap-2">
+            <p-skeleton width="4rem" height="2rem"></p-skeleton>
+            <p-skeleton width="4rem" height="2rem"></p-skeleton>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </p-card>
+  }
+</div> -->

@@ -1,0 +1,59 @@
+<p-toast
+  life="3000"
+  position="top-right"
+  [breakpoints]="{ '920px': { width: '100%', right: '0', left: '0' } }"
+></p-toast>
+<div class="products-list-wrapper">
+  <app-categories
+    (emitProducts)="onProductsLoaded($event)"
+    (emitSearchFlag)="onSearchFlagChanged($event)"
+  ></app-categories>
+  @if(productsLoading$ | async){
+
+  <!--TODO: Replace with skeletons -->
+  <span>Loading...</span>
+  }
+
+  <div class="bg-white">
+    <div
+      class="mx-auto max-w-2xl px-4 py-4 sm:px-6 sm:py-16 lg:max-w-7xl lg:px-6"
+    >
+      <div
+        class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8"
+      >
+        @for(product of products$ | async; track $index){
+        <a class="group">
+          <img
+            [src]="product.images[0]"
+            [alt]="product.title"
+            (click)="viewProductClicked(product.id)"
+            class="aspect-square cursor-pointer w-full rounded-lg bg-gray-200 object-cover group-hover:opacity-75 xl:aspect-7/8"
+          />
+          <h3
+            (click)="viewProductClicked(product.id)"
+            class="cursor-pointer mt-4 text-md text-gray-700"
+          >
+            {{ product.title }}
+          </h3>
+          <p
+            (click)="viewProductClicked(product.id)"
+            class="cursor-pointer mt-1 text-lg font-bold text-gray-900"
+          >
+            {{ product.price | currency }}
+          </p>
+          <button
+            (onClick)="addToCart($event, product)"
+            pButton
+            label="Add to cart"
+            size="small"
+            class="w-full my-3"
+            icon="pi pi-shopping-bag"
+          ></button>
+        </a>
+        }@empty() {
+        <span>No products</span>
+        }
+      </div>
+    </div>
+  </div>
+</div>

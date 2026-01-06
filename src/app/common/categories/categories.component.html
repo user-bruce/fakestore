@@ -1,0 +1,116 @@
+<div class="categories-container flex gap-2">
+  @if(productCategories().length ===0){
+  <div class="categories-inner">
+    <p-skeleton height="2.5rem" class="mb-2" width="6rem" borderRadius="16px" />
+    <p-skeleton height="2.5rem" class="mb-2" width="4rem" borderRadius="16px" />
+    <p-skeleton height="2.5rem" class="mb-2" width="5rem" borderRadius="16px" />
+    <p-skeleton height="2.5rem" class="mb-2" width="6rem" borderRadius="16px" />
+    <p-skeleton height="2.5rem" class="mb-2" width="5rem" borderRadius="16px" />
+    <p-skeleton height="2.5rem" class="mb-2" width="4rem" borderRadius="16px" />
+    <p-skeleton height="2.5rem" class="mb-2" width="5rem" borderRadius="16px" />
+  </div>
+  }@else {
+  <div class="categories-inner">
+    @for(cat of productCategories(); track $index){
+    <p-chip
+      pRipple
+      [label]="cat.name"
+      [image]="cat.image"
+      alt="Avatar image"
+      (click)="onCategoryClicked(cat.name)"
+    />
+    }
+  </div>
+  <div class="card flex justify-center">
+    <p-dialog
+      [modal]="true"
+      [visible]="filterDialogVisible()"
+      [style]="{ width: '25rem' }"
+    >
+      <ng-template #header>
+        <div class="inline-flex items-center justify-center gap-2">
+          <i class="pi pi-sliders-h"></i>
+          <span class="font-bold whitespace-nowrap"
+            >Choose filters to apply</span
+          >
+        </div>
+      </ng-template>
+      <span class="p-text-secondary block mb-4 text-sm"
+        >Filter by exact price</span
+      >
+      <div class="flex items-center gap-2 mb-4">
+        <label class="font-semibold w-16 mr-2">Amount (USD)</label>
+        <p-inputnumber class="w-full" placeholder="$0.00" inputId="currency-us" mode="currency" currency="USD" locale="en-US" />
+      </div>
+      <div class="my-10 flex items-center justify-center">
+        <hr class="w-full" />
+        <span class="mx-2">OR</span>
+        <hr class="w-full" />
+      </div>
+      <span class="p-text-secondary block mb-4 text-sm">Price Range</span>
+      <div class="flex flex-col gap-4 mb-8">
+        <p-slider
+          [(ngModel)]="rangeValues"
+          [range]="true"
+          class="w-full"
+          [max]="200"
+        />
+        <div class="flex items-center justify-between">
+          <span class="text-sm" style="color: rgb(194, 95, 2)"
+            >Min : {{ rangeValues[0] | currency }}</span
+          >
+          <span class="text-sm" style="color: rgb(2, 110, 2)"
+            >Max : {{ rangeValues[1] | currency }}</span
+          >
+        </div>
+      </div>
+      <div class="flex justify-end gap-2 pt-4">
+        <p-button
+          label="Cancel"
+          size="small"
+          severity="secondary"
+          (click)="filterDialogVisible.set(false)"
+        />
+        <p-button
+          size="small"
+          label="Apply Filters"
+          (click)="filterDialogVisible.set(false)"
+        />
+      </div>
+    </p-dialog>
+  </div>
+  }
+  <div class="search-container">
+    <input
+      type="text"
+      [formControl]="searchControl"
+      style="
+        margin-bottom: 0.5rem;
+        max-width: 450px;
+        min-width: 350px;
+        margin-top: 0.95rem;
+      "
+      pInputText
+      placeholder="Search product ..."
+      fluid
+    />
+    <button
+      (click)="showFilterDialog()"
+      outlined="false"
+      class="mt-1"
+      raised="true"
+      pButton
+      icon="pi pi-sliders-h"
+    ></button>
+    <p-menu
+      #menu
+      class="flex justify-center"
+      styleClass="md: w-80 lg:w-30"
+      [popup]="true"
+    >
+      <ng-template #start>
+        <app-price-filter></app-price-filter>
+      </ng-template>
+    </p-menu>
+  </div>
+</div>

@@ -1,0 +1,79 @@
+<p-drawer
+  [visible]="visible()"
+  (onHide)="this.closeCartClicked()"
+  position="right"
+  styleClass="!w-full md:!w-80 lg:!w-[30rem]"
+>
+  <ng-template #header>
+    <div class="flex items-center gap-2 cart-header">
+      <p-avatar image="../../../assets/logo.png" shape="circle" />
+      <span class="font-bold text-2xl">Shopping Cart</span>
+    </div>
+  </ng-template>
+  <p-dataview #dv *ngIf="products$ | async as products" [value]="products">
+    <ng-template #list>
+      @for(item of products; track $index){
+      <div class="flex justify-between flex-wrap m-3">
+        <div class="flex justify-start gap-2">
+          <img class="w-20 h-20 rounded-md" [src]="item.product.images[0]" />
+          <div class="flex flex-col items-start justify-start">
+            <span class="text-lg font-semibold">{{ item.product.title }}</span>
+            <span class="text-sm text-gray-400">{{
+              item.product.category.name
+            }}</span>
+          </div>
+        </div>
+        <div class="flex flex-col">
+          <span class="text-3xl font-bold my-3">$1.25</span>
+          <div class="grid grid-cols-8 items-center">
+            <span class="text-gray-500 col-start-1 col-end-3"
+              >QTY : {{ item.quantity }}</span
+            >
+            <p-button
+              icon="pi pi-plus"
+              [text]="true"
+              severity="success"
+              [outlined]="false"
+            />
+            <p-button
+              icon="pi pi-minus"
+              [text]="true"
+              severity="warn"
+              [outlined]="false"
+            />
+            <div class="ml-10 flex justify-end w-full">
+              <p-button
+                label="Remove"
+                class="col-start-5 col-end-8"
+                text="true"
+                size="small"
+                severity="danger"
+              ></p-button>
+            </div>
+          </div>
+        </div>
+      </div>
+      @if(item !== products[products.length-1]){
+      <p-divider></p-divider>
+      } }
+    </ng-template>
+    <ng-template #empty>
+      <div class="flex flex-col items-center justify-center">
+        <i class="pi pi-shopping-cart"></i>
+        <span class="text-gray-400">You have no items in your cart</span>
+      </div>
+    </ng-template>
+  </p-dataview>
+
+  <ng-template #footer class="bg-gray-300">
+    <div class="mt-5">
+      <p class="text-3xl font-bold text-green-800">Total : $358.89</p>
+      <button
+        pButton
+        label="Checkout"
+        icon="pi pi-credit-card"
+        class="w-full"
+      ></button>
+    </div>
+  </ng-template>
+</p-drawer>

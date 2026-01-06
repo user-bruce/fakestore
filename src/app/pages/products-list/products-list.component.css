@@ -1,0 +1,60 @@
+.products-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+.product-card,
+::ng-deep .p-card .p-card-content {
+  width: 100%;
+  height: 100%;
+  min-width: 300px;
+  cursor: point;
+}
+
+.product-image {
+  border-top-left-radius: 0.45rem;
+  border-top-right-radius: 0.45rem;
+  object-fit: fill;
+}
+
+.actions-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.5rem;
+}
+
+@media screen and (max-width: 1560px) {
+  .products-list {
+    display: grid;
+    margin: 0px 160px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+  }
+  .product-card {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 1350px) {
+  .products-list {
+    display: grid;
+    margin: 0px 160px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+}
+
+@media screen and (max-width: 980px) {
+  .products-list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  ::ng-deep .p-card .p-card-content {
+    min-width: 300px;
+  }
+}

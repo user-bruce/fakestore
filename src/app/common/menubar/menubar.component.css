@@ -1,0 +1,76 @@
+.menu-right-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+::ng-deep .p-menubar{
+    background-color: rgb(186, 186, 186);
+    border-radius: 0px;
+}
+
+.menu-button {
+  background-color: transparent;
+  color: black;
+}
+
+.add-button {
+  font-size: 0.675rem;
+}
+
+.cart-row {
+  display: grid;
+  margin: 0.5rem 0rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.25rem;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px,
+    rgb(209, 213, 219) 0px 0px 0px 1px inset;
+  place-items: center;
+  grid-template-columns: 5fr 1fr 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.product-name {
+  font-size: 0.8rem;
+}
+
+.cart-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.quantity-text{
+    font-size: .75rem;
+}
+
+::ng-deep .p-divider{
+    margin-top: 3.5rem;
+}
+
+.cart-header span {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: rgb(99, 99, 99);
+}
+
+::ng-deep .p-drawer {
+ min-width: 400px;
+}
+
+.total-figure{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.checkout-wrapper{
+    display: flex;
+    justify-content: center;
+}
+
+.total-title,.total-text{
+    font-size: 1.15rem;
+    font-weight: 600;
+}
