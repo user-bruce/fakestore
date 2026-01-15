@@ -5,28 +5,62 @@ export const ProductsActions = createActionGroup({
   source: 'Products Page',
   events: {
     //List products
-    'Load Products': emptyProps(),
-    'Load Products Success': props<{ products: Product[] }>(),
-    'Load Products Failure': props<{ error: unknown }>(),
+    loadProducts: emptyProps(),
+    loadProductsSuccess: props<{ products: Product[] }>(),
+    loadProductsFailure: props<{ error: unknown }>(),
 
     //Load a single Product
-    'Load Product': props<{ id: number }>(),
-    'Load Product Success': props<{ product: Product }>(),
-    'Load Product Failure': props<{ error: unknown }>(),
+    loadProduct: props<{ id: number }>(),
+    loadProductSuccess: props<{ product: Product }>(),
+    loadProductFailure: props<{ error: unknown }>(),
+
+    //Search for a single product
+    searchProducts: props<{ query: string }>(),
+    searchProductsSuccess: props<{ products: Product[] }>(),
+    searchProductsFailure: props<{ error: unknown }>(),
+
+    //Filter products by category
+    filterProductsByCategory: props<{ category: string }>(),
+    filterProductsByCategorySuccess: props<{ products: Product[] }>(),
+    filterProductsByCategoryFailure: props<{ error: unknown }>(),
 
     //Create a product
-    'Create Product': props<{ product: Product }>(),
-    'Create Product Success': props<{ product: Product }>(),
-    'Create Product Failure': props<{ error: unknown }>(),
+    createProduct: props<{ product: Product }>(),
+    createProductSuccess: props<{ product: Product }>(),
+    createProductFailure: props<{ error: unknown }>(),
 
     //Update a single product
-    'Update Product': props<{ id: number; changes: Partial<Product> }>(),
-    'Update Product Success': props<{ product: Product }>(),
-    'Update Product Failure': props<{ error: unknown }>(),
+    updateProduct: props<{ id: number; changes: Partial<Product> }>(),
+    updateProductSuccess: props<{ product: Product }>(),
+    updateProductFailure: props<{ error: unknown }>(),
 
     //Delete a single product
-    'Delete Product': props<{ id: number }>(),
-    'Delete Product Success': props<{ id: number }>(),
-    'Delete Product Failure': props<{ error: unknown }>(),
+    deleteProduct: props<{ id: number }>(),
+    deleteProductSuccess: props<{ id: number }>(),
+    deleteProductFailure: props<{ error: unknown }>(),
   },
 });
+
+const {
+  loadProducts,
+  loadProductsSuccess,
+  loadProductsFailure,
+  loadProduct,
+  loadProductSuccess,
+  loadProductFailure,
+  createProduct,
+  createProductSuccess,
+  createProductFailure,
+  updateProduct,
+  updateProductSuccess,
+  updateProductFailure,
+  deleteProduct,
+  deleteProductSuccess,
+  deleteProductFailure,
+  searchProducts,
+  searchProductsSuccess,
+  searchProductsFailure,
+  filterProductsByCategory,
+  filterProductsByCategorySuccess,
+  filterProductsByCategoryFailure,
+}=ProductsActions;

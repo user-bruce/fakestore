@@ -10,8 +10,7 @@
   ></app-categories>
   @if(productsLoading$ | async){
 
-  <!--TODO: Replace with skeletons -->
-  <span>Loading...</span>
+  <p-progress-spinner ariaLabel="loading" />
   }
 
   <div class="bg-white">

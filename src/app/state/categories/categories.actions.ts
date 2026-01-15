@@ -4,23 +4,38 @@ import { ProductCategory } from '../../models/product';
 export const CategoriesActions = createActionGroup({
   source: 'Product Categories',
   events: {
-    'Load Categories': emptyProps(),
-    'Load Categories Success': props<{ categories: ProductCategory[] }>(),
-    'Load Categories Error': props<{ error: unknown }>(),
+    loadCategories: emptyProps(),
+    loadCategoriesSuccess: props<{ categories: ProductCategory[] }>(),
+    loadCategoriesError: props<{ error: unknown }>(),
 
-    'Create Category': props<{ category: ProductCategory }>(),
-    'Create Category Success': props<{ category: ProductCategory }>(),
-    'Create Category Error': props<{ error: unknown }>(),
+    createCategory: props<{ category: ProductCategory }>(),
+    createCategorySuccess: props<{ category: ProductCategory }>(),
+    createCategoryError: props<{ error: unknown }>(),
 
-    'Update Category': props<{
+    updateCategory: props<{
       id: number;
       changes: Partial<ProductCategory>;
     }>(),
-    'Update Category Success': props<{ category: ProductCategory }>(),
-    'Update Category Error': props<{ error: unknown }>(),
+    updateCategorySuccess: props<{ category: ProductCategory }>(),
+    updateCategoryError: props<{ error: unknown }>(),
 
-    'Delete Category': props<{ id: number }>(),
-    'Delete Category Success': props<{ id: number }>(),
-    'Delete Category Error': props<{ error: unknown }>(),
+    deleteCategory: props<{ id: number }>(),
+    deleteCategorySuccess: props<{ id: number }>(),
+    deleteCategoryError: props<{ error: unknown }>(),
   },
 });
+
+const {
+  loadCategories,
+  loadCategoriesSuccess,
+  loadCategoriesError,
+  createCategory,
+  createCategorySuccess,
+  createCategoryError,
+  updateCategory,
+  updateCategorySuccess,
+  updateCategoryError,
+  deleteCategory,
+  deleteCategorySuccess,
+  deleteCategoryError,
+} = CategoriesActions;

@@ -1,8 +1,8 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { of } from 'rxjs';
+import { debounce, EMPTY, of } from 'rxjs';
 import { ProductsActions } from './products.actions';
-import { catchError, map, mergeMap } from 'rxjs';
+import { catchError, map, mergeMap, switchMap, debounceTime } from 'rxjs';
 import { ProductsService } from '../../services/products.service';
 
 export const ProductsEffect = {
@@ -36,6 +36,44 @@ export const ProductsEffect = {
             )
           )
         )
+      ),
+    { functional: true }
+  ),
+
+  searchProductsEffect: createEffect(
+    (actions$ = inject(Actions), productsService = inject(ProductsService)) =>
+      actions$.pipe(
+        ofType(ProductsActions.searchProducts),
+        debounceTime(300),
+        mergeMap(({ query }) => {
+          return productsService.filterProductsByTitle(query).pipe(
+            map((products) =>
+              ProductsActions.searchProductsSuccess({ products })
+            ),
+            catchError((error) =>
+              of(ProductsActions.searchProductsFailure({ error }))
+            )
+          );
+        })
+      ),
+    { functional: true }
+  ),
+
+  filterProductsByCategoryEffect: createEffect(
+    (actions$ = inject(Actions), productsService = inject(ProductsService)) =>
+      actions$.pipe(
+        ofType(ProductsActions.searchProducts),
+        debounceTime(300),
+        mergeMap(({ query }) => {
+          return productsService.filterProductsByCategory(query).pipe(
+            map((products) =>
+              ProductsActions.searchProductsSuccess({ products })
+            ),
+            catchError((error) =>
+              of(ProductsActions.searchProductsFailure({ error }))
+            )
+          );
+        })
       ),
     { functional: true }
   ),

@@ -21,6 +21,7 @@ export const productsFeature = createFeature({
   reducer: createReducer(
     initialState,
 
+
     // PRODUCTS LISTING ACTIONS
     on(ProductsActions.loadProducts, (state) => ({
       ...state,
@@ -38,6 +39,7 @@ export const productsFeature = createFeature({
       loading: false,
       error,
     })),
+
 
     // LOAD SINGLE PRODUCT ACTIONS
     on(ProductsActions.loadProduct, (state) => ({
@@ -57,19 +59,43 @@ export const productsFeature = createFeature({
       error,
     })),
 
-    // CREATE A SINGLE PRODUCT ACTION
+
+    //SEARCH A SINGLE PRODUCT ACTION REDUCERS
+    on(ProductsActions.searchProducts, (state) => ({
+      ...state,
+      loading: true,
+    })),
+
+
+    on(ProductsActions.searchProductsSuccess, (state, { products }) => ({
+      ...state,
+      loading: false,
+      products,
+    })),
+
+
+    on(ProductsActions.searchProductsFailure, (state, { error }) => ({
+      ...state,
+      loading: false,
+      error,
+    })),
+
+
+    // CREATE A SINGLE PRODUCT ACTION REDUCERS
     on(ProductsActions.createProduct, (state, { product }) => ({
       ...state,
       products: [...state.products, product],
     })),
 
-    // UPDATE A PRODUCT
+
+    // UPDATE A PRODUCT ACTION REDUCERS
     on(ProductsActions.updateProductSuccess, (state, { product }) => ({
       ...state,
       products: state.products.map((p) => (p.id === product.id ? product : p)),
     })),
 
-    // DELETE A PRODUCT
+    
+    // DELETE A PRODUCT ACTION REDUCERS
     on(ProductsActions.deleteProductSuccess, (state, { id }) => ({
       ...state,
       products: state.products.filter((p) => {
@@ -79,6 +105,7 @@ export const productsFeature = createFeature({
   ),
 });
 
+//Selectors = name(feature name), reducer and selectors for each piece of data in the state
 export const {
   name,
   reducer,

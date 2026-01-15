@@ -22,19 +22,24 @@ export const categoriesFeature = createFeature({
   reducer: createReducer(
     initialState,
 
-    //Load all categories
+    //LOADING RELATED ACTIONS
     on(CategoriesActions.loadCategories, (state) => ({
       ...state,
       loading: true,
     })),
-
-    //Load categories success
     on(CategoriesActions.loadCategoriesSuccess, (state, { categories }) => ({
       ...state,
       loading: false,
       selectedCategory: null,
       products,
-    }))
+    })),
+    on(CategoriesActions.loadCategoriesError, (state, { error }) => ({
+      ...state,
+      loading: false,
+      selectedCategory: null,
+      error,
+    })),
+    
   ),
 });
 

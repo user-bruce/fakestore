@@ -25,6 +25,8 @@ import { debounceTime, distinctUntilChanged, of, switchMap } from 'rxjs';
 import { AvatarModule } from 'primeng/avatar';
 import { SliderModule } from 'primeng/slider';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { Store } from '@ngrx/store';
+import { CategoriesActions } from '../../state/categories/categories.actions';
 
 @Component({
   selector: 'app-categories',
@@ -60,6 +62,11 @@ export class CategoriesComponent {
   @Output() emitProducts = new EventEmitter<Product[]>();
   @Output() emitSearchFlag = new EventEmitter<boolean>(false);
 
+  store = inject(Store);
+  categories  = this.store.selectSignal(
+    (state) => state.categories
+  );
+
   productCategories = signal<ProductCategory[]>([]);
   filterDialogVisible = signal<boolean>(false);
   rangeValues: number[] = [10, 150];
@@ -69,17 +76,12 @@ export class CategoriesComponent {
     this.fetchProductCategories();
     this.fetchProducts();
     this.onSearchValueChanges();
+
+    console.log(this.categories());
   }
 
   fetchProductCategories() {
-    this.categoriesService.fetchProductCategories().subscribe({
-      next: (value) => {
-        this.productCategories.set(value);
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
+    this.store.dispatch(CategoriesActions.loadCategories());
   }
 
   formatAmount(value: any): string {
